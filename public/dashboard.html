@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Get Me Hired PRO</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha384-rAR61xYjBvjPAAID5f9jByffGX9fPCDquUvy5CDSWVAUcQ5rgB/NAL7q9sN93IqY" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #343a40;
+            box-shadow: 0px 4px 2px -2px gray;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+        }
+
+        .navbar-toggler-icon {
+            color: #ffc107;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: white;
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #ffc107;
+        }
+
+        .navbar-nav .nav-item.dropdown:hover .nav-link {
+            color: #ffc107;
+        }
+
+        .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+            background-color: #343a40;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: white;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #343a40;
+            color: #ffc107;
+        }
+
+        .btn-cta {
+            background-color: #ffc107;
+            color: #343a40;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-cta:hover {
+            background-color: #343a40;
+            color: #ffc107;
+        }
+
+        .dashboard-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            margin-top: 50px;
+            background-color: white;
+            box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .cv-item {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .logout-btn {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+     <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/" title="Get Me Hired PRO">
+            <img src="logo.png" alt="Get Me Hired PRO">
+            <span class="ml-2 text-white">PRO</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars" aria-hidden="true" style="color: #ffc107;"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard.html">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="logout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <h2 class="mb-4">Your Dashboard</h2>
+
+        <div class="row">
+            <!-- CV creation form -->
+            <div class="col-md-6">
+                <form id="cvForm">
+                    <div class="form-group">
+                        <label for="cvTitle">CV Title:</label>
+                        <input type="text" class="form-control" id="cvTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvContent">CV Content:</label>
+                        <textarea class="form-control" id="cvContent" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvFileInput">Upload CV File:</label>
+                        <input type="file" class="form-control-file" id="cvFileInput" accept=".pdf, .doc, .docx"
+                            required>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-cta" onclick="saveCV()">Save CV</button>
+                    <button type="button" class="btn btn-success btn-cta ml-2" onclick="uploadCV()">Upload CV
+                        File</button>
+                </form>
+            </div>
+
+            <!-- List of saved CVs -->
+            <div class="col-md-6">
+                <div id="cvListContainer">
+                    <h3 class="mb-4">Saved CVs</h3>
+                    <div id="cvList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+   <script>
+        // Function to get the user ID from the URL
+        function getUserId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = urlParams.get('userId');
+            return userId;
+        }
+
+        // Function to save CV data
+        function saveCV() {
+            const userId = getUserId();
+            const title = document.getElementById('cvTitle').value;
+            const content = document.getElementById('cvContent').value;
+
+            // Make a POST request to save the CV
+            fetch('/save-cv', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId, title, content }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('CV saved successfully!');
+                        // Implement logic to update the UI if needed
+                        getCVs(); // Refresh the CV list
+                    } else {
+                        alert('Failed to save CV. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again later.');
+                });
+        }
+
+        // Function to get CVs for the user
+        function getCVs() {
+            const userId = getUserId();
+
+            // Make a GET request to retrieve user-specific CVs
+            fetch(`/get-cvs/${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Implement logic to display the CVs in the UI
+                        renderCVs(data.cvs);
+                    } else {
+                        console.log('Failed to retrieve CVs.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again later.');
+                });
+        }
+
+        // Function to render CVs in the UI
+        function renderCVs(cvs) {
+            const cvListContainer = document.getElementById('cvList');
+            cvListContainer.innerHTML = ''; // Clear the existing list
+
+            cvs.forEach(cv => {
+                const cvItem = document.createElement('div');
+                cvItem.className = 'cv-item';
+                cvItem.innerHTML = `<strong>${cv.title}</strong><br>${cv.content}`;
+
+                // Check if a file is uploaded
+                if (cv.filename) {
+                    // Display the filename along with a link/button to download/view the file
+                    cvItem.innerHTML += `<br>File: ${cv.filename} <a href="/uploads/${cv.filename}" target="_blank">Download File</a>`;
+                }
+
+                // Add a delete button
+                cvItem.innerHTML += `<br><button class="btn btn-danger" onclick="deleteCV(${cv.id})">Delete</button>`;
+
+                cvListContainer.appendChild(cvItem);
+            });
+        }
+
+        // Function to delete a CV
+        function deleteCV(cvId) {
+            const userId = getUserId();
+
+            // Make a DELETE request to delete the CV
+            fetch(`/delete-cv/${userId}/${cvId}`, {
+                method: 'DELETE',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('CV deleted successfully!');
+                        // Implement logic to update the UI if needed
+                        getCVs(); // Refresh the CV list
+                    } else {
+                        alert('Failed to delete CV. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again later.');
+                });
+        }
+
+        // Function to upload CV file
+        function uploadCV() {
+            const userId = getUserId();
+            const title = document.getElementById('cvTitle').value;
+            const content = document.getElementById('cvContent').value;
+            const cvFileInput = document.getElementById('cvFileInput');
+
+            const formData = new FormData();
+            formData.append('userId', userId);
+            formData.append('title', title);
+            formData.append('content', content);
+            formData.append('cvFile', cvFileInput.files[0]);
+
+            // Make a POST request to upload the CV file
+            fetch(`/upload-cv`, {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('CV uploaded successfully!');
+                        // Implement logic to update the UI if needed
+                        getCVs(); // Refresh the CV list
+                    } else {
+                        alert('Failed to upload CV. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again later.');
+                });
+        }
+
+        // Function to logout
+        function logout() {
+            // Make a POST request to logout
+            fetch('/logout', {
+                method: 'POST',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Redirect to the home page after successful logout
+                        window.location.href = '/index.html';
+                    } else {
+                        console.log('Failed to logout.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again later.');
+                });
+        }
+
+        // Initial call to get CVs when the page loads
+        getCVs();
+    </script>
+
+
+</body>
+
+</html>

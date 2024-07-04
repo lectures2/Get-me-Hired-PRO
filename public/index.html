@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Me Hired PRO</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha384-rAR61xYjBvjPAAID5f9jByffGX9fPCDquUvy5CDSWVAUcQ5rgB/NAL7q9sN93IqY" crossorigin="anonymous">
+    <style>
+        /* Add your custom styles here */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #2d2d2d;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+        }
+
+        .navbar-toggler-icon {
+            color: #ffc107;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: white;
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #ffc107;
+        }
+
+        .navbar-nav .nav-item.dropdown:hover .nav-link {
+            color: #ffc107;
+        }
+
+        .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+            background-color: #3f3f3f;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: white;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #3f3f3f;
+            color: #ffc107;
+        }
+
+        .btn-cta {
+            background-color: #ffc107;
+            color: #2d2d2d;
+        }
+
+        .btn-cta:hover {
+            background-color: #2d2d2d;
+            color: #ffc107;
+        }
+
+        /* Custom styles for login form */
+        #loginForm {
+            display: none;
+        }
+
+        #loginBtn {
+            cursor: pointer;
+        }
+
+        #loginForm .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .get-pro {
+            background-color: #2d2d2d;
+            color: white;
+            padding: 80px 0;
+        }
+
+        .highlighted-text {
+            color: #ffc107;
+        }
+
+        .highlighted {
+            background-color: #ffc107;
+            color: #2d2d2d;
+            padding: 0 5px;
+        }
+
+        .cta-round {
+            background-color: #ffc107;
+            color: #2d2d2d;
+            padding: 10px 20px;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .cta-round:hover {
+            background-color: #2d2d2d;
+            color: #ffc107;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/" title="Get Me Hired PRO">
+            <img src="logo.png" alt="Get Me Hired PRO">
+            <span class="ml-2">PRO</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Our Programs
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="https://getmehired.co/programs/fullstack">Full Stack Development</a>
+                        <a class="dropdown-item" href="https://getmehired.co/program/datascience">Data Science</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://getmehired.co/stories" title="Success Stories">Success Stories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://getmehired.co/faqs" title="FAQ">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://getmehired.co/employers" title="Employers">Employers</a>
+                </li>
+                <li>
+                    <a href="#" title="Apply Now" class="btn btn-cta icon-btn navbar-btn" onclick="applyNow()">
+                        <span class="btn-text">Apply Now</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login.html" title="Already a member?">Already a member?</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Login form -->
+    <div class="container mt-4" id="loginForm">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password">
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="login()">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- GetMeHiredPRO section -->
+    <section class="get-pro home_pro">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 col-md-6 order-md-1 order-2">
+                    <div class="development-text">
+                        <h1>Get a team behind you to get you <span class="highlighted-text">
+                                <span class="highlighted-text">
+                                    <span class="highlighted">hired!</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150"
+                                        preserveAspectRatio="none"><path
+                                            d="M6.1,133.6c0,0,173.4-20.6,328.3-14.5c154.8,6.1,162.2,8.7,162.2,8.7s-262.6-4.9-339.2,13.9 c0,0,113.8-6.1,162.9,6.9"></path></svg>
+                                </span>
+                            </span>
+                        </h1>
+                        <h2>For International Students &amp; Immigrants in the USA &amp; Canada.</h2>
+                        <a href="#" title="Apply Now" class="btn btn-cta icon-btn navbar-btn" onclick="applyNow()">
+                            <span class="btn-text">Apply Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6  order-md-2 order-1">
+                    <div class="img_holder">
+                        <img src="main.svg" alt="Pro getmehired">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div>
+        <!-- Your content goes here -->
+    </div>
+
+    <!-- Add Bootstrap and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- Add Font Awesome script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+        integrity="sha384-A4PfF1CZW4T5aln6b1m16FUdJMSoPLiDbGwAeD54gM5S2Oq45zUMIOn5rXKcLIUa"
+        crossorigin="anonymous"></script>
+
+    <script>
+        // Function to redirect to signup page
+        function redirectToSignup() {
+            window.location.href = '/signup.html'; // Change the URL to your signup page
+        }
+
+        // Function to redirect to login page
+        function redirectToLogin() {
+            window.location.href = '/login.html'; // Change the URL to your login page
+        }
+
+        // Function to handle Apply Now button click
+        function applyNow() {
+            // Redirect to signup page when Apply Now is clicked
+            redirectToSignup();
+        }
+    </script>
+
+</body>
+
+</html>
